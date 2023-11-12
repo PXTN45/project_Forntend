@@ -39,22 +39,22 @@ export default function SignIn() {
   const [error, setError] = useState({});
   const navigate = useNavigate();
   // const {login} = useAuthContext();
-  const [username, setUsername] = useState({
+  const [user, setUser] = useState({
     username: "",
     password: "",
   });
 
 
-  const Input = (e) => {
-    setUsername((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  const handelChange = (e) => {
+    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
       const current = await authService.login(
-        username.username,
-        username.password
+        user.username,
+        user.password
       );
       authService.login(current);
       console.log(current);
@@ -64,6 +64,10 @@ export default function SignIn() {
       console.log(error);
     }
   };
+  const handleCancel = () => {
+    navigate("/");
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -91,8 +95,8 @@ export default function SignIn() {
               fullWidth
               id="username"
               label="Username"
-              onChange={Input}
-              value={username.username}
+              onChange={handelChange}
+              value={user.username}
               name="username"
               autoComplete="username"
               autoFocus
@@ -103,8 +107,8 @@ export default function SignIn() {
               fullWidth
               name="password"
               label="Password"
-              onChange={Input}
-              value={username.password}
+              onChange={handelChange}
+              value={user.password}
               type="password"
               id="password"
               autoComplete="current-password"
@@ -116,6 +120,16 @@ export default function SignIn() {
               sx={{ mt: 3, mb: 2 }}
             >
               Sign In
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ mb: 2 }}
+              onClick={handleCancel}
+            >
+              cancel
             </Button>
             <Grid container>
               <Grid item sm={12}>

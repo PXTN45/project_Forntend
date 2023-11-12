@@ -3,7 +3,19 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-// import api from "../services/api";
+
+// MUI framework
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
+import { colors } from "@mui/material";
+
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
 const PASSWORD = import.meta.env.VITE_BASE_PASSWORD;
@@ -14,7 +26,25 @@ const config = {
   },
   //   headers : authHeader(),
 };
-const Add = () => {
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#757ce8",
+      main: "#ef6c00",
+      dark: "#fb8c00",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
+
+export default function Add() {
   const [restaurant, setRestaurant] = useState({
     name: "",
     type: "",
@@ -26,7 +56,7 @@ const Add = () => {
   const handelChange = (e) => {
     setRestaurant((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
-  const handleClick = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       await axios.post(`${URL}/restaurant`, restaurant, config);
@@ -36,65 +66,89 @@ const Add = () => {
       setError(true);
     }
   };
-  const handleClear = () => {
-    setRestaurant({
-      name: "",
-      type: "",
-      img: "",
-    });
-    setError(false);
+  const handleCancel = () => {
+    navigate("/");
   };
 
   return (
-    <div className="container">
-      <h1>Grab Restaurant</h1>
-      <div className="row form">
-        <div className="col-6 card justify-content-center">
-          <h5 className="card-header"> Add new Restaurant </h5>
-          <div className="error">{error && "Somthing went wrong"}</div>
-          <div className="card-body">
-            <form>
-              <div className="form-group">
-                <label htmlFor="name"> Restaurant name </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="name"
-                  placeholder="name"
-                  onChange={handelChange}
-                  value={restaurant.name}
-                />
-                <label htmlFor="name"> Restaurant type </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="type"
-                  placeholder="type"
-                  onChange={handelChange}
-                  value={restaurant.type}
-                />
-                <label htmlFor="name"> Restaurant img </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="img"
-                  placeholder="img"
-                  onChange={handelChange}
-                  value={restaurant.img}
-                />
-              </div>
-              <Link to="" className="btn btn-success m-3" onClick={handleClick}>
-                Add
-              </Link>
-              <Link to="" className="btn btn-danger" onClick={handleClear}>
-                Clear
-              </Link>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5" marginTop={15}>
+            Add new Restaurant
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="name"
+              label="name"
+              onChange={handelChange}
+              value={restaurant.name}
+              name="name"
+              autoComplete="name"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="type"
+              label="type"
+              onChange={handelChange}
+              value={restaurant.type}
+              type="type"
+              id="type"
+              autoComplete="current-type"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="img"
+              label="img"
+              onChange={handelChange}
+              value={restaurant.img}
+              type="img"
+              id="img"
+              autoComplete="current-type"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Add
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              onClick={handleCancel}
+            >
+              cancel
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
-};
+}
 
-export default Add;
+// export default Add;

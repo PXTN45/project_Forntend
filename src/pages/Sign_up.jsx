@@ -31,42 +31,36 @@ const theme = createTheme({
   },
 });
 
-export default function sign_up() {
+export default function signUp() {
   const navigate = useNavigate();
+
   const [error, setError] = useState(false);
   const [errorMessage, setErrorMessage] = useState({ message: "" });
+
   const [user, setUser] = useState({
-    Username: "",
+    username: "",
     Email: "",
     Password: "",
-    Confirm_Password: "",
-});
+    Confirm_password: "",
+  });
 
-  
   const handelChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleClear = () => {
-    setUser({
-      Username: "",
-      Email: "",
-      Password: "",
-      Confirm_Password: "",
-    });
-    // setError(false);
+  const handleCancel = () => {
+    navigate("/");
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (user.Confirm_Password === user.Password) {
+      if (user.Confirm_password === user.Password) {
         const register = await AuthService.register(
-          user.Username,
+          user.username,
           user.Email,
           user.Password
         );
-
       } else {
         setError(true);
         setErrorMessage({ message: "Failed Password mismatched !" });
@@ -79,72 +73,97 @@ export default function sign_up() {
     }
   };
   return (
-    <div className="container">
-      <h1>Grab Restaurant</h1>
-      <div className="row form">
-        <div className="col-6 card justify-content-center">
-          <h5 className="card-header"> Sign Up </h5>
-          <div className="error">{error && errorMessage.message}</div>
-          <div className="card-body">
-            <form>
-              <div className="form-group">
-                <label htmlFor="name"> Username </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="Username"
-                  placeholder="Username"
-                  onChange={handelChange}
-                  value={user.Username}
-                />
-                <label htmlFor="name"> Email </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="Email"
-                  placeholder="Email"
-                  onChange={handelChange}
-                  value={user.Email}
-                />
-                <label htmlFor="name"> Password </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="Password"
-                  placeholder="Password"
-                  onChange={handelChange}
-                  value={user.Password}
-                />
-                <label htmlFor="name"> Confirm Password </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="Confirm_Password"
-                  placeholder="Confirm_Password"
-                  onChange={handelChange}
-                  value={user.Confirm_Password}
-                />
-                <button
-                  type="button"
-                  className="btn btn-success m-3"
-                  onClick={handleClick}
-                >
-                  sign up
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleClear}
-                >
-                  Clear
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5" marginTop={15}>
+            Sign up
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleClick}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              onChange={handelChange}
+              value={user.username}
+              name="username"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="Email"
+              label="Email"
+              onChange={handelChange}
+              value={user.Email}
+              name="Email"
+              autoComplete="Email"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              onChange={handelChange}
+              value={user.password}
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="Confirm_Password"
+              label="Confirm_Password"
+              onChange={handelChange}
+              value={user.Confirm_password}
+              type="Confirm_Password"
+              id="Confirm_Password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign Up
+            </Button>
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="secondary"
+              sx={{ mb: 2 }}
+              onClick={handleCancel}
+            >
+              cancel
+            </Button>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
-};
+}
 
 // export default Sign_up;

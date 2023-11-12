@@ -10,7 +10,7 @@ const Nevbar = () => {
   };
   const linkStyle = {
     color: '#fff',
-    fontSize: '35px',
+    fontSize: '25px',
   };
 
   return (

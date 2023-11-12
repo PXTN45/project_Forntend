@@ -9,7 +9,7 @@ export const Profile = () => {
           className="card profile my-2 light" 
           style={{ width: "500px", borderRadius: "10px" }}
         >
-          <div className="card-header"> Profile </div>
+          <div className="card-header"style={{ backgroundColor: "#ef6c00" }}> Profile </div>
           <div className="card-body">
             <div className="card-title h5">{user.username} </div>
             <div className="card-text">
