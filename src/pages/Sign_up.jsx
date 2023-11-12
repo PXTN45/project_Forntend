@@ -41,7 +41,7 @@ export default function signUp() {
     username: "",
     Email: "",
     password: "",
-    Confirm_password: "",
+    confirm_password: "",
   });
 
   const handelChange = (e) => {
@@ -55,7 +55,7 @@ export default function signUp() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (user.Confirm_password === user.password) {
+      if (user.confirm_password === user.password) {
         const register = await AuthService.register(
           user.username,
           user.Email,
@@ -136,7 +136,7 @@ export default function signUp() {
               name="Confirm_Password"
               label="Confirm_Password"
               onChange={handelChange}
-              value={user.Confirm_password}
+              value={user.confirm_password}
               type="Confirm_Password"
               id="Confirm_Password"
               autoComplete="current-password"
