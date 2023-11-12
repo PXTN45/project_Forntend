@@ -1,12 +1,30 @@
 import { Link, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../context/auth.context";
+import Swal from 'sweetalert2'
 
 const Nevbar = () => {
   const { user, logout } = useAuthContext();
   const navigate = useNavigate();
   const handleLogout = () => {
-    logout();
-    navigate("/sign_in"); 
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to logout",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Logout",
+          text: "Logout successed",
+          icon: "success"
+        });
+        logout();
+        navigate("/sign_in"); 
+      }
+    });
   };
   const linkStyle = {
     color: '#fff',
