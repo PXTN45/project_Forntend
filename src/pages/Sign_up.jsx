@@ -40,9 +40,9 @@ export default function signUp() {
 
   const [user, setUser] = useState({
     username: "",
-    Email: "",
+    email: "",
     password: "",
-    confirm_Password: "",
+    confirm_password: "",
   });
 
   const handelChange = (e) => {
@@ -56,23 +56,24 @@ export default function signUp() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (user.confirm_Password === user.password) {
+      if (user.confirm_password === user.password) {
         const register = await AuthService.register(
           user.username,
-          user.Email,
+          user.email,
           user.password
         );
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Sign up successed",
+          showConfirmButton: false,
+          timer: 1500,
+        });
       } else {
         setError(true);
         setErrorMessage({ message: "Failed Password mismatched !" });
       }
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Your work has been saved",
-        showConfirmButton: false,
-        timer: 1500,
-      });
+
       navigate("/sign_in");
     } catch (error) {
       console.error(error);
@@ -116,12 +117,12 @@ export default function signUp() {
               margin="normal"
               required
               fullWidth
-              id="Email"
-              label="Email"
+              id="email"
+              label="email"
               onChange={handelChange}
-              value={user.Email}
-              name="Email"
-              autoComplete="Email"
+              value={user.email}
+              name="email"
+              autoComplete="email"
               autoFocus
             />
             <TextField
@@ -140,13 +141,13 @@ export default function signUp() {
               margin="normal"
               required
               fullWidth
-              name="confirm_Password"
-              label="confirm_Password"
+              name="confirm_password"
+              label="confirm_password"
               onChange={handelChange}
-              value={user.confirm_Password}
-              type="confirm_Password"
-              id="confirm_Password"
-              autoComplete="current-confirm_Password"
+              value={user.confirm_password}
+              type="password"
+              id="confirm_password"
+              autoComplete="current-password"
             />
 
             <Button
@@ -157,7 +158,6 @@ export default function signUp() {
             >
               Sign Up
             </Button>
-
             <Button
               type="submit"
               fullWidth
