@@ -40,7 +40,7 @@ export default function signUp() {
   const [user, setUser] = useState({
     username: "",
     Email: "",
-    Password: "",
+    password: "",
     Confirm_password: "",
   });
 
@@ -55,11 +55,11 @@ export default function signUp() {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
-      if (user.Confirm_password === user.Password) {
+      if (user.Confirm_password === user.password) {
         const register = await AuthService.register(
           user.username,
           user.Email,
-          user.Password
+          user.password
         );
       } else {
         setError(true);
