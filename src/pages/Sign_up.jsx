@@ -133,13 +133,13 @@ export default function signUp() {
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
+              name="confirm_Password"
+              label="confirm_Password"
               onChange={handelChange}
-              // value={user.confirm_Password}
-              type="password"
-              id="password"
-              autoComplete="current-password"
+              value={user.confirm_Password}
+              type="confirm_Password"
+              id="confirm_Password"
+              autoComplete="current-confirm_Password"
             />
 
             <Button
