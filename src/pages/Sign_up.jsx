@@ -85,7 +85,7 @@ export default function signUp() {
           }}
         >
           <Typography component="h1" variant="h5" marginTop={15}>
-            Sign up
+            Sign up edit
           </Typography>
           <Box
             component="form"
@@ -133,14 +133,15 @@ export default function signUp() {
               margin="normal"
               required
               fullWidth
-              name="Confirm_Password"
-              label="Confirm_Password"
+              name="password"
+              label="Password"
               onChange={handelChange}
-              value={user.confirm_Password}
-              type="Confirm_Password"
-              id="Confirm_Password"
-              autoComplete="current-Confirm_Password"
+              // value={user.confirm_Password}
+              type="password"
+              id="password"
+              autoComplete="current-password"
             />
+
             <Button
               type="submit"
               fullWidth
