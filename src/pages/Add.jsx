@@ -64,7 +64,7 @@ export default function Add() {
       Swal.fire({
         position: "center",
         icon: "success",
-        title: "Your add new Restaurant successed",
+        title: "Add new Restaurant successed",
         showConfirmButton: false,
         timer: 1500
       });
