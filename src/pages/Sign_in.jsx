@@ -2,7 +2,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
-// import { useAuthContext  } from '../context/Auth.context'
+// import { useAuthContext  } from '../context/auth.context'
 
 // MUI framework
 import Button from "@mui/material/Button";
@@ -14,6 +14,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import { colors } from "@mui/material";
 
 const theme = createTheme({
   palette: {
@@ -42,6 +43,7 @@ export default function SignIn() {
     username: "",
     password: "",
   });
+
 
   const Input = (e) => {
     setUsername((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -118,11 +120,11 @@ export default function SignIn() {
             <Grid container>
               <Grid item sm={12}>
                 <Typography fontSize={15}>
-                  Don't have an account?
+                  Don't have an account?{" "}
                   <Link
-                    to="/Register"
+                    to="/sign_up"
                     variant="body2"
-                    color="#594035"
+                    style={{colors:"#ef6c00"}}
                     spacing={6}
                   >
                     Sign Up

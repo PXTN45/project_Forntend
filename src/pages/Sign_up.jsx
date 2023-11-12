@@ -3,16 +3,45 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../services/auth.service";
-const Sign_up = () => {
+
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#757ce8",
+      main: "#ef6c00",
+      dark: "#fb8c00",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
+
+export default function sign_up() {
+  const navigate = useNavigate();
+  const [error, setError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState({ message: "" });
   const [user, setUser] = useState({
     Username: "",
     Email: "",
     Password: "",
     Confirm_Password: "",
-  });
-  const navigate = useNavigate();
-  const [error, setError] = useState(false);
-  const [errorMessage, setErrorMessage] = useState({ message: "" });
+});
+
   
   const handelChange = (e) => {
     setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
@@ -118,4 +147,4 @@ const Sign_up = () => {
   );
 };
 
-export default Sign_up;
+// export default Sign_up;

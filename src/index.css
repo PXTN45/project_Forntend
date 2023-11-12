@@ -68,9 +68,7 @@ body {
   padding-left: 10px;
 
 }
-.container {
+#profile {
   display: flex;
-  align-items: center;
-  justify-content: center;
 }
  
