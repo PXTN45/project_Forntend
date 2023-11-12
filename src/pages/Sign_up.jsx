@@ -13,6 +13,7 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
+import Swal from "sweetalert2";
 
 const theme = createTheme({
   palette: {
@@ -65,7 +66,13 @@ export default function signUp() {
         setError(true);
         setErrorMessage({ message: "Failed Password mismatched !" });
       }
-
+      Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Your work has been saved",
+        showConfirmButton: false,
+        timer: 1500,
+      });
       navigate("/sign_in");
     } catch (error) {
       console.error(error);
@@ -85,7 +92,7 @@ export default function signUp() {
           }}
         >
           <Typography component="h1" variant="h5" marginTop={15}>
-            Sign up edit
+            Sign up
           </Typography>
           <Box
             component="form"
@@ -150,6 +157,7 @@ export default function signUp() {
             >
               Sign Up
             </Button>
+
             <Button
               type="submit"
               fullWidth
