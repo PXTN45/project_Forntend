@@ -1,91 +1,138 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable react-hooks/rules-of-hooks */
-import React from "react";
+// import * as React from 'react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthService from "../services/auth.service";
-import { useAuthContext } from "../context/auth.context"
+import authService from "../services/auth.service";
+// import { useAuthContext  } from '../context/Auth.context'
 
-const sign_in = () => {
-  const [user, setUser] = useState({
-    Username: "",
-    Password: "",
-  });
+// MUI framework
+import Button from "@mui/material/Button";
+import CssBaseline from "@mui/material/CssBaseline";
+import TextField from "@mui/material/TextField";
+import Grid from "@mui/material/Grid";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Container from "@mui/material/Container";
+import { ThemeProvider } from "@mui/material/styles";
+import { createTheme } from "@mui/material/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      light: "#757ce8",
+      main: "#ef6c00",
+      dark: "#fb8c00",
+      contrastText: "#fff",
+    },
+    secondary: {
+      light: "#ff7961",
+      main: "#f44336",
+      dark: "#ba000d",
+      contrastText: "#000",
+    },
+  },
+});
+
+// TODO remove, this demo shouldn't need to reset the theme.
+
+export default function SignIn() {
+  const [error, setError] = useState({});
   const navigate = useNavigate();
-  console.log(useAuthContext);
-  const {login} = useAuthContext();
-  const [error, setError] = useState(false);
-  const handelChange = (e) => {
-    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  // const {login} = useAuthContext();
+  const [username, setUsername] = useState({
+    username: "",
+    password: "",
+  });
+
+  const Input = (e) => {
+    setUsername((prev) => ({ ...prev, [e.target.name]: e.target.value }));
   };
 
-  const handleClear = () => {
-    setUser({
-      Username: "",
-      Password: "",
-    });
-    setError(false);
-  };
-  const handleClick = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
-      const currentUser = await AuthService.login(user.Username,user.Password)
-      console.log(currentUser);
-      login(currentUser)
+      const current = await authService.login(
+        username.username,
+        username.password
+      );
+      authService.login(current);
+      console.log(current);
       navigate("/");
     } catch (error) {
-      console.error(error);
-      setError(true);
+      setError(error);
+      console.log(error);
     }
   };
   return (
-    <div className="container">
-      <h1>Grab Restaurant</h1>
-      <div className="row form">
-        <div className="col-6 card justify-content-center">
-          <h5 className="card-header"> Sign In </h5>
-          <div className="card-body">
-            <form>
-              <div className="form-group">
-                <label htmlFor="name"> Username </label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="Username"
-                  placeholder="Username"
-                  onChange={handelChange}
-                  value={user.Username}
-                />
-                <label htmlFor="name"> Password </label>
-                <input
-                  type="password"
-                  className="form-control"
-                  name="Password"
-                  placeholder="Password"
-                  onChange={handelChange}
-                  value={user.Password}
-                />
-                <button
-                  type="button"
-                  className="btn btn-success m-3"
-                  onClick={handleClick}
-                >
-                  sign in
-                </button>
-                <button
-                  type="button"
-                  className="btn btn-danger"
-                  onClick={handleClear}
-                >
-                  Clear
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Container component="main" maxWidth="xs">
+        <CssBaseline />
+        <Box
+          sx={{
+            marginTop: 8,
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          <Typography component="h1" variant="h5" marginTop={15}>
+            Sign in
+          </Typography>
+          <Box
+            component="form"
+            onSubmit={handleSubmit}
+            noValidate
+            sx={{ mt: 1 }}
+          >
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              id="username"
+              label="Username"
+              onChange={Input}
+              value={username.username}
+              name="username"
+              autoComplete="username"
+              autoFocus
+            />
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="Password"
+              onChange={Input}
+              value={username.password}
+              type="password"
+              id="password"
+              autoComplete="current-password"
+            />
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              sx={{ mt: 3, mb: 2 }}
+            >
+              Sign In
+            </Button>
+            <Grid container>
+              <Grid item sm={12}>
+                <Typography fontSize={15}>
+                  Don't have an account?
+                  <Link
+                    to="/Register"
+                    variant="body2"
+                    color="#594035"
+                    spacing={6}
+                  >
+                    Sign Up
+                  </Link>
+                </Typography>
+              </Grid>
+            </Grid>
+          </Box>
+        </Box>
+      </Container>
+    </ThemeProvider>
   );
-};
-
-export default sign_in;
+}

@@ -2,6 +2,7 @@
 import React from 'react'
 import { useState, useEffect } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
+// import authHeader from "../services/auth.header"
 // import api from "../services/api"
 import axios from 'axios';
 
@@ -13,7 +14,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
-  //   headers : authHeader(),
+    // headers : authHeader(),
 };
 const Edit = () => {
     const [restaurant, setRestaurant] = useState({
@@ -62,7 +63,7 @@ const Edit = () => {
     <div className="container">
     <h1>Grab Restaurant</h1>
     <div className="row form">
-      <div className="col-6 card justify-content-center">
+      <div className="col-6 card-edit justify-content-center">
         <h5 className="card-header"> Edit Restaurant </h5>
         <div className="error">{error && "Somthing went wrong"}</div>
         <div className="card-body">

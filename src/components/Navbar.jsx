@@ -6,16 +6,18 @@ const Nevbar = () => {
   const navigate = useNavigate();
   const handleLogout = () => {
     logout();
-    navigate("/sign_in");
+    navigate("/sign_in"); 
   };
+  const linkStyle = {
+    color: '#fff',
+    fontSize: '35px',
+  };
+
   return (
-    <nav
-      className="navbar navbar-expand-lg bg-body-tertiary"
-      data-bs-theme="dark"
-    >
+    <nav className="navbar navbar-expand-lg  " style={{ backgroundColor: "#ef6c00" }}>
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
-          Restaurant
+        <Link className="navbar-brand" to="/" style={linkStyle}>
+          <b>Restaurant</b>
         </Link>
         <button
           className="navbar-toggler"
@@ -28,16 +30,15 @@ const Nevbar = () => {
         >
           <span className="navbar-toggler-icon"></span>
         </button>
+
         {user && user.roles && user.roles.includes("ROLES_ADMIN") && (
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav">
-              <li className="nav-item">
-                <Link className="nav-link " to="/Add">
-                  Add
-                </Link>
-              </li>
-            </ul>
-          </div>
+          <ul className="nav">
+            <li className="nav-item">
+              <Link className="nav-link " style={{ color: "#fff" }} to="/add">
+                Add
+              </Link>
+            </li>
+          </ul>
         )}
         <div className="Signin">
           {!user && (
@@ -75,18 +76,15 @@ const Nevbar = () => {
           {user && (
             <ul className="nav justify-content-end ">
               <li className="nav-item">
-                <span className="mr-sm2  " style={{ margin: "auto" }}>
-                  <Link to={"/profile"}>{user.username}</Link>
-                  <Link
-                    className="logout"
-                    style={{ color: "#fff" }}
-                    to="/logout"
-                    onClick={handleLogout}
-                  >
-                    {" "}
-                    Logout
-                  </Link>
-                </span>
+                <Link className="nav-link" to={"/profile"} style={{ color: "#fff" }} >{user.username}</Link>
+                <Link
+                  className="nav-link"
+                  style={{ color: "#fff" }}
+                  to="/logout"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </Link>
               </li>
             </ul>
           )}

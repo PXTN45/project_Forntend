@@ -28,9 +28,9 @@ const Restaurant = () => {
   useEffect(() => {
     const fetchAllRestaurants = async () => {
       try {
-        console.log(`${URL}/restaurant`);
+        // console.log(`${URL}/restaurant`);
         const res = await axios.get(`${URL}/restaurant`, config);
-        setRestaurant(res.data);
+        setRestaurant(res.data)
       } catch (error) {
         console.error(error);
       }
