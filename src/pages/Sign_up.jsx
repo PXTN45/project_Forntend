@@ -69,12 +69,11 @@ export default function signUp() {
           showConfirmButton: false,
           timer: 1500,
         });
+        navigate("/sign_in");
       } else {
         setError(true);
         setErrorMessage({ message: "Failed Password mismatched !" });
       }
-
-      navigate("/sign_in");
     } catch (error) {
       console.error(error);
       setError(true);

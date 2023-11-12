@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { colors } from "@mui/material";
+import Swal from 'sweetalert2'
 
 const theme = createTheme({
   palette: {
@@ -57,7 +58,13 @@ export default function SignIn() {
         user.password
       );
       authService.login(current);
-      console.log(current);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Login successed",
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate("/");
     } catch (error) {
       setError(error);
