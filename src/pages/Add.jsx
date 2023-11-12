@@ -15,6 +15,7 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { colors } from "@mui/material";
+import Swal from 'sweetalert2'
 
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
@@ -60,6 +61,13 @@ export default function Add() {
     e.preventDefault();
     try {
       await axios.post(`${URL}/restaurant`, restaurant, config);
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Your add new Restaurant successed",
+        showConfirmButton: false,
+        timer: 1500
+      });
       navigate("/");
     } catch (error) {
       console.error(error);
@@ -67,7 +75,25 @@ export default function Add() {
     }
   };
   const handleCancel = () => {
-    navigate("/");
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You want to cancel!",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        Swal.fire({
+          title: "Cancel!",
+          text: "Your cancel successed",
+          icon: "success"
+        });
+        navigate("/");
+      }
+    });
+
   };
 
   return (
@@ -85,12 +111,12 @@ export default function Add() {
           <Typography component="h1" variant="h5" marginTop={15}>
             Add new Restaurant
           </Typography>
-          <Box
+          {/* <Box
             component="form"
-            onSubmit={handleSubmit}
+
             noValidate
             sx={{ mt: 1 }}
-          >
+          > */}
             <TextField
               margin="normal"
               required
@@ -132,6 +158,7 @@ export default function Add() {
               fullWidth
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
+              onClick={handleSubmit}
             >
               Add
             </Button>
@@ -144,7 +171,7 @@ export default function Add() {
             >
               cancel
             </Button>
-          </Box>
+          {/* </Box> */}
         </Box>
       </Container>
     </ThemeProvider>
