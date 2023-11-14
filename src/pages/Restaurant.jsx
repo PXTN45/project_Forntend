@@ -7,6 +7,7 @@ import Card from "../components/Card";
 import Search from "./Search";  
 // import authHeader from "../services/auth.header";
 import Swal from 'sweetalert2'
+import authHeader from "../services/auth.header";
 
 
 const URL = import.meta.env.VITE_BASE_URL
@@ -17,7 +18,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
-//   headers : authHeader(),
+  headers : authHeader(),
 };
 
 const Restaurant = () => {
@@ -50,15 +51,16 @@ const Restaurant = () => {
       if (result.isConfirmed) {
         try {
           await axios.delete(`${URL}/restaurant/${id}`, config);
+          Swal.fire(
+            'Deleted!',
+            'Your file has been deleted.',
+            'success'
+          )
           window.location.reload();
         } catch (error) {
           console.error(error);
         }
-        Swal.fire(
-          'Deleted!',
-          'Your file has been deleted.',
-          'success'
-        )
+
       }
     })
 

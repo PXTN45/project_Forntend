@@ -3,7 +3,7 @@ import React from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
-
+import authHeader from "../services/auth.header.js"
 // MUI framework
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,7 +15,7 @@ import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
 import { colors } from "@mui/material";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
@@ -25,7 +25,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
-  //   headers : authHeader(),
+    headers : authHeader(),
 };
 
 const theme = createTheme({
@@ -51,6 +51,7 @@ export default function Add() {
     type: "",
     img: "",
   });
+  const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
   const [error, setError] = useState(false);
 
@@ -66,14 +67,16 @@ export default function Add() {
         icon: "success",
         title: "Add new Restaurant successed",
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
+
       navigate("/");
     } catch (error) {
       console.error(error);
       setError(true);
     }
   };
+
   const handleCancel = () => {
     Swal.fire({
       title: "Are you sure?",
@@ -82,20 +85,18 @@ export default function Add() {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes"
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Cancel!",
           text: "Your cancel successed",
-          icon: "success"
+          icon: "success",
         });
         navigate("/");
       }
     });
-
   };
-
   return (
     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
@@ -111,66 +112,60 @@ export default function Add() {
           <Typography component="h1" variant="h5" marginTop={15}>
             Add new Restaurant
           </Typography>
-          {/* <Box
-            component="form"
-
-            noValidate
-            sx={{ mt: 1 }}
-          > */}
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="name"
-              onChange={handelChange}
-              value={restaurant.name}
-              name="name"
-              autoComplete="name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="type"
-              label="type"
-              onChange={handelChange}
-              value={restaurant.type}
-              type="type"
-              id="type"
-              autoComplete="current-type"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="img"
-              label="img"
-              onChange={handelChange}
-              value={restaurant.img}
-              type="img"
-              id="img"
-              autoComplete="current-type"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleSubmit}
-            >
-              Add
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              onClick={handleCancel}
-            >
-              cancel
-            </Button>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="name"
+            onChange={handelChange}
+            value={restaurant.name}
+            name="name"
+            autoComplete="name"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="type"
+            label="type"
+            onChange={handelChange}
+            value={restaurant.type}
+            type="type"
+            id="type"
+            autoComplete="current-type"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="img"
+            label="img"
+            onChange={handelChange}
+            value={restaurant.img}
+            type="img"
+            id="img"
+            autoComplete="current-type"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleSubmit}
+          >
+            Add
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            onClick={handleCancel}
+          >
+            cancel
+          </Button>
           {/* </Box> */}
         </Box>
       </Container>

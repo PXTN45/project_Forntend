@@ -30,6 +30,7 @@ const Nevbar = () => {
     color: '#fff',
     fontSize: '25px',
   };
+  console.log(user);
 
   return (
     <nav className="navbar navbar-expand-lg  " style={{ backgroundColor: "#ef6c00" }}>
@@ -60,6 +61,7 @@ const Nevbar = () => {
         )}
         <div className="Signin">
           {!user && (
+
             <ul className="nav justify-content-end">
               <li className="nav-item">
                 <Link

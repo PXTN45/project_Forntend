@@ -1,8 +1,6 @@
-// import * as React from 'react';
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import authService from "../services/auth.service";
-// import { useAuthContext  } from '../context/auth.context'
 
 // MUI framework
 import Button from "@mui/material/Button";
@@ -66,6 +64,7 @@ export default function SignIn() {
         timer: 1500
       });
       navigate("/");
+      window.location.reload();
     } catch (error) {
       setError(error);
       console.log(error);

@@ -1,18 +1,17 @@
-import React from "react";
 import { useState, useEffect } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import authHeader from "../services/auth.header";
 
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
 import TextField from "@mui/material/TextField";
-import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { ThemeProvider } from "@mui/material/styles";
 import { createTheme } from "@mui/material/styles";
-import Swal from 'sweetalert2'
+import Swal from "sweetalert2";
 
 const URL = import.meta.env.VITE_BASE_URL;
 const USERNAME = import.meta.env.VITE_BASE_USERNAME;
@@ -22,7 +21,7 @@ const config = {
     username: USERNAME,
     password: PASSWORD,
   },
-  // headers : authHeader(),
+  headers: authHeader(),
 };
 
 const theme = createTheme({
@@ -75,7 +74,7 @@ export default function Edit() {
         icon: "success",
         title: `Update restaurant ${restaurantId} successed`,
         showConfirmButton: false,
-        timer: 1500
+        timer: 1500,
       });
       navigate("/");
     } catch (error) {
@@ -92,13 +91,13 @@ export default function Edit() {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes"
+      confirmButtonText: "Yes",
     }).then((result) => {
       if (result.isConfirmed) {
         Swal.fire({
           title: "Cancel!",
           text: "Your cancel successed",
-          icon: "success"
+          icon: "success",
         });
         navigate("/");
       }
@@ -126,60 +125,60 @@ export default function Edit() {
             noValidate
             sx={{ mt: 1 }}
           > */}
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="name"
-              label="name"
-              onChange={handelChange}
-              value={restaurant.name}
-              name="name"
-              autoComplete="name"
-              autoFocus
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="type"
-              label="type"
-              onChange={handelChange}
-              value={restaurant.type}
-              type="type"
-              id="type"
-              autoComplete="current-type"
-            />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="img"
-              label="img"
-              onChange={handelChange}
-              value={restaurant.img}
-              type="img"
-              id="img"
-              autoComplete="current-type"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              onClick={handleSubmit}
-            >
-              Edit
-            </Button>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="secondary"
-              onClick={handleCancel}
-            >
-              cancel
-            </Button>
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            id="name"
+            label="name"
+            onChange={handelChange}
+            value={restaurant.name}
+            name="name"
+            autoComplete="name"
+            autoFocus
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="type"
+            label="type"
+            onChange={handelChange}
+            value={restaurant.type}
+            type="type"
+            id="type"
+            autoComplete="current-type"
+          />
+          <TextField
+            margin="normal"
+            required
+            fullWidth
+            name="img"
+            label="img"
+            onChange={handelChange}
+            value={restaurant.img}
+            type="img"
+            id="img"
+            autoComplete="current-type"
+          />
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            sx={{ mt: 3, mb: 2 }}
+            onClick={handleSubmit}
+          >
+            Edit
+          </Button>
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="secondary"
+            onClick={handleCancel}
+          >
+            cancel
+          </Button>
           {/* </Box> */}
         </Box>
       </Container>
