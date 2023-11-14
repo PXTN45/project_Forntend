@@ -56,7 +56,7 @@ export default function Edit() {
   useEffect(() => {
     const fetchAllRestaurants = async () => {
       try {
-        const res = await axios.get(`${URL}/restaurant/${restaurantId}`);
+        const res = await axios.get(`${URL}/restaurant/${restaurantId}`, config);
         setRestaurant(res.data.result);
       } catch (error) {
         console.error(error);
