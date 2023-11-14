@@ -30,7 +30,7 @@ const Nevbar = () => {
     color: '#fff',
     fontSize: '25px',
   };
-  console.log(user);
+  // console.log(user);
 
   return (
     <nav className="navbar navbar-expand-lg  " style={{ backgroundColor: "#ef6c00" }}>
