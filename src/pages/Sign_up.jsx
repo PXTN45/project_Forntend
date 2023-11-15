@@ -91,7 +91,7 @@ export default function signUp() {
             alignItems: "center",
           }}
         >
-          <Typography component="h1" variant="h5" marginTop={15}>
+          <Typography component="h1" variant="h5" marginTop={5}>
             Sign up
           </Typography>
           <Box

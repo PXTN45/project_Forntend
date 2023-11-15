@@ -26,7 +26,14 @@ function App() {
               </AdminRoute>
             }
           />
-          <Route path="/edit/:restaurantId" element={<Edit />} />
+          <Route
+            path="/edit/:restaurantId"
+            element={
+              <AdminRoute>
+                <Edit />
+              </AdminRoute>
+            }
+          />
           <Route path="/sign_in" element={<Sign_in />} />
           <Route path="/sign_up" element={<Sign_up />} />
           <Route path="/logout" element={<Logout />} />

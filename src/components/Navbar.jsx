@@ -38,26 +38,15 @@ const Nevbar = () => {
         <Link className="navbar-brand" to="/" style={linkStyle}>
           <b>Restaurant</b>
         </Link>
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNav"
-          aria-controls="navbarNav"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon"></span>
-        </button>
 
         {user && user.roles && user.roles.includes("ROLES_ADMIN") && (
-          <ul className="nav">
+          <ul className="nav " id="nav-bar"  > 
             <li className="nav-item">
-              <Link className="nav-link " style={{ color: "#fff" }} to="/add">
+              <Link className="nav-link" style={{ color: "#fff" }} to="/add">
                 Add
-              </Link>
+              </Link> 
             </li>
-          </ul>
+           </ul> 
         )}
         <div className="Signin">
           {!user && (
@@ -96,7 +85,7 @@ const Nevbar = () => {
           {user && (
             <ul className="nav justify-content-end ">
               <li className="nav-item">
-                <Link className="nav-link" to={"/profile"} style={{ color: "#fff" }} >{user.username}</Link>
+                <Link className="nav-link" to={"/profile"} style={{ color: "#fff"  }} >{user.username}</Link>
                 <Link
                   className="nav-link"
                   style={{ color: "#fff" }}
